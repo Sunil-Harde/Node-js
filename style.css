@@ -1,0 +1,121 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  font-family: Arial, sans-serif;
+  background-color: #f0eded;
+}
+
+.grid-container {
+  display: grid;
+  padding: 20px;
+  grid-template-columns: repeat(5, 200px);
+  grid-template-rows: repeat(7, 150px);
+  gap: 20px;
+}
+
+.item {
+  background: #ec0b0b;
+  text-align: center;
+}
+
+#item1 {
+  grid-column: span 2;
+  background: url(https://cdn.pixabay.com/photo/2022/04/15/07/58/sunset-7133867_1280.jpg);
+  background-size: cover;
+}
+
+#item1 img {
+  width: 100%;
+  height: 100%;
+}
+
+#item2 {
+  grid-column: span 1;
+  background-color: #99ccff;
+
+}
+
+#item2 img {
+  width: 100%;
+  height: 100%;
+}
+
+#item3 {
+  grid-column: span 2;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiDi7WpDVu-i8jWsLuIxIV_Q-ZREschrMt2A&s);
+  background-size: cover;
+}
+
+#item3 img {
+  width: 100%;
+  height: 100%;
+} 
+
+#item4 {
+  grid-column: span 2;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbM2K5-wFfxh8IozqY3GTX9BCAwazzvfgrPw&s);
+  background-size: cover;
+}
+
+#item5 {
+  grid-column: span 2;
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXKJ1YkYJ0b1Yk1b3p3F2F1c3H3jz1F4Z4TA&s);
+  background-size: cover;
+}
+
+#item6 {
+  grid-column: span 2;
+  background: url(https://www.diabetesendocrinology.in/wp-content/uploads/2020/10/father-baby-beach-pixabay.jpg);
+  background-size: cover;
+}
+
+#item7 {
+  grid-column: span 2;
+  background: url(https://earth.org/wp-content/uploads/2023/11/wildlife-3193850_1280-1024x682.jpg);
+  background-size: cover;
+}
+
+#item8 {
+  grid-column: span 2;
+  background: url(https://media.cnn.com/api/v1/images/stellar/prod/171115114227-prague-pixabay.jpg?q=w_1110,c_fill);
+  background-size: cover;
+}
+
+#item9 {
+
+  background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXKJ1YkYJ0b1Yk1b3p3F2F1c3H3jz1F4Z4TA&s);
+  background-size: cover;
+}
+
+#item10 {
+  grid-column: span 2;
+  background: url(https://cdn.pixabay.com/photo/2016/10/22/18/52/beach-1761410_1280.jpg);
+  background-size: cover;
+}
+
+#item11 {
+  background: url(https://cdn.pixabay.com/photo/2015/06/01/05/58/shells-792912_1280.jpg);
+  background-size: cover;
+}
+
+#item12 {
+  background: url(https://cdn.pixabay.com/photo/2013/05/11/20/44/spring-flowers-110671_1280.jpg);
+  background-size: cover;
+}
+
+#item13 {
+  grid-row: span 1;
+  background-color: #99ccff;
+
+}
+
+#item13 img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
