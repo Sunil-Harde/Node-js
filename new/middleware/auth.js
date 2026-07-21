@@ -5,8 +5,7 @@ export const auth = async (req, res, next) => {
 
     try {
 
-        const bearerHeader = req.headers['authorization']
-
+        const bearerHeader = req.headers.authorization
 
 
         if (!bearerHeader) {
@@ -16,7 +15,6 @@ export const auth = async (req, res, next) => {
                 message: "Access denied. No token exist"
             })
         }
-
 
         const token = bearerHeader.split(' ')[1]
 

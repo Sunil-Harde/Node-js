@@ -12,6 +12,7 @@ import { auth } from "./middleware/auth.js"
 import productRoutes from "./routes/product.routes.js"
 
 import userRoutes from "./routes/user.routes.js"
+import { errorHandler } from "./middleware/errorHandler.js"
 
 connect()
 
@@ -38,6 +39,8 @@ app.get("/", (req, res) => {
     })
 })
 
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000
 

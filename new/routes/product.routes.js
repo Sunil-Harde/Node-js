@@ -9,7 +9,7 @@ const router = express.Router()
 
 
 router.post("/", createProductValidator, validateRequest, createProduct)
-router.get("/",authorize("admin"), getProduct)
+router.get("/",authorize("admin", "user"), getProduct)
 
 
 export default router

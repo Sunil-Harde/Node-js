@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 import ProductModel from "../model/Product.js"
 
 
-export const createProduct = async (req, res) => {
+export const createProduct = async (req, res, next) => {
 
     try {
 
@@ -24,11 +24,7 @@ export const createProduct = async (req, res) => {
 
 
     catch (err) {
-        res.status(500).json({
-            success: false,
-            message: "internal server error",
-
-        })
+        next(err)
     }
 
 }
@@ -38,7 +34,7 @@ export const createProduct = async (req, res) => {
 
 
 
-export const getProduct = async (req, res) => {
+export const getProduct = async (req, res, next) => {
 
     try {
 
@@ -55,13 +51,7 @@ export const getProduct = async (req, res) => {
 
     catch (err) {
 
-
-        console.log(err.message)
-
-        res.status(500).json({
-            success: false,
-            message: "internal server error"
-        })
+        next(err)
     }
 }
 
