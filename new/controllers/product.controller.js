@@ -6,12 +6,17 @@ export const createProduct = async (req, res, next) => {
 
     try {
 
-        const { name, number } = req.body
+        const { name, price } = req.body
+        console.log(req.file);
+        const image = req.file.filename;
+
+
 
 
         const product = await ProductModel.create({
             name,
-            number
+            price,
+            image
         })
 
 

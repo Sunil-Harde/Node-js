@@ -12,24 +12,18 @@ import { auth } from "./middleware/auth.js"
 import productRoutes from "./routes/product.routes.js"
 
 import userRoutes from "./routes/user.routes.js"
-import { errorHandler } from "./middleware/errorHandler.js"
+import errorHandler  from "./middleware/errorHandler.js"
 
 connect()
 
 
 app.use(express.json())
-
+app.use("/uploads", express.static("uploads"));
 
 app.use(cors({
     origin:"http://localhost:5173"
 }))
 
-
-app.use("/api/user", userRoutes)
-
-
-app.use(auth)
-app.use("/api/product", productRoutes)
 
 
 app.get("/", (req, res) => {
@@ -38,6 +32,14 @@ app.get("/", (req, res) => {
         message: "practice api production"
     })
 })
+
+
+app.use("/api/user", userRoutes)
+
+
+// app.use(auth)
+app.use("/api/product", productRoutes)
+
 
 
 app.use(errorHandler);
