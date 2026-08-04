@@ -1,0 +1,7 @@
+1)  How do you securely store the access and refresh tokens on the frontend to prevent Cross-Site Scripting (XSS) and Cross-Site Request Forgery (CSRF) attacks? Walk me through the exact architectural flow when a short-lived access token expires but the refresh token is still valid.
+
+2)  You need to fetch the top 5 users who spent the most money in the last 30 days. You have a Users collection and an Orders collection. Why would you use MongoDB Aggregation pipelines ($lookup, $match, $group) for this instead of Mongoose's .populate(), and how would you structure that pipeline?
+
+3)  How would you design a custom rate limiter using Redis to block an IP address after 5 failed login attempts within 15 minutes? What Redis data structures and commands (like INCR and EXPIRE) would you use to prevent race conditions?
+
+4)  What are the best practices for structuring your Dockerfile to take advantage of layer caching (e.g., when copying package.json)? Furthermore, why is it a major security risk to run your Node application as the default root user inside a Docker container, and how do you fix it?

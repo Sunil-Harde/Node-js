@@ -1,37 +1,94 @@
-const fs = require("fs")
+// const express = require("express")
+// const mongoose = require("mongoose")
+// const connect = require("./config/connectDB")
+// const productRoute = require("./router/product.routes.js")
+// const app = express()
 
-// fs.writeFile("text.txt", "my name is ram", (err) => {
-//     console.log("file created successfully");
+
+// connect()
+
+// app.use(express.json())
+
+// app.get("/", (req, res) => {
+
+//     res.json({
+//         success: true,
+//         message: "api is running"
+
+//     })
 
 // })
 
-// fs.readFile("text.txt", "utf-8", (err, data) => {
-//     console.log(data);
+// app.use("/api/product", productRoute)
+
+
+// app.listen(5000, () => {
+
+//     console.log('server running on 5000');
+
 // })
 
 
-// fs.unlink("new.txt", (err) => {
-//     console.log("file delete successfully");
 
-// })
+const cookieParser = require("cookie-parser")
+const express = require("express")
+
+const app = express()
 
 
-// fs.mkdir("server/by",(err)=>{
-//     console.log("folder created successfully");
-    
-// })
 
-fs.rmdir("hi",(err)=>{
-    console.log("folder deleted successfully");
-    
+app.use(cookieParser)
+
+
+app.post("/login", async (req, res) => {
+
+    const refreshToken = 'abcd123'
+
+    const cookiePass = "acb123"
+
+    res.cookie(cookiePass, refreshToken,
+        {
+            httpOnly: true,
+            maxAge: 1000 * 60
+        }
+
+    )
+
+    res.json({
+        success: true,
+        message: "login successfully"
+    })
+
 })
 
-// fs.appendFile("text.txt", "\nhi", (err)=>{
-//     console.log("file update successfully");
-    
-// })
+app.get("/cookie", (req, res) => {
 
-// fs.rename("text.txt", "new.txt", (err)=>{
-//     console.log("file name updated successfully");
+    console.log(req.cookies);
+
     
-// })
+    res.json({
+        success: true,
+        cookie: req.cookies
+    })
+})
+
+    app.post("logout", (req, res) => {
+
+        res.clearCookie('refreshToken');
+
+        res.json({
+            success: true,
+            message: 'Logged out'
+        });
+
+
+
+})
+
+
+
+app.listen(5000, () => {
+
+    console.log('server running on 5000');
+
+})

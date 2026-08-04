@@ -85,6 +85,12 @@ So I start the server only after successful DB connection.
 
 ”
 
+
+Why hash reset tokens?”, 
+
+“I hash password reset tokens before storing them in MongoDB so that a database leak does not expose usable reset links. The raw token is sent only to the user via email, and during reset I hash the incoming token and compare it with the stored hash.”
+
+
 What is Node.js and why do we use it?
 
 How does Node.js work?

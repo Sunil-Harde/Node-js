@@ -1,48 +1,68 @@
 import React from 'react'
-import axios from 'axios'
-
+import axios from "axios"
 function App() {
 
-
-    // async function fetchData() {
-
-    //     const token = localStorage.getItem("token")
-
-    //     let res = await axios.get("http://localhost:5000/api/product",
-
-    //         // {
-    //         //     "email": "ss@s.com",
-    //         //     "password": "dsdf3232@H"
-    //         // }
-
-    //         headers: {
-    //         Authorization: `Bearer ${token}`,
-    //         "Content-Type": "application/json"
-    //     })
+    let url = "http://localhost:8080/path"
 
 
-    async function fetchData() {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTVhMTgyMjk0MGVjZDNkOTRlYTQ0MjYiLCJuYW1lIjoic3VuaWwiLCJlbWFpbCI6InNzQHMuY29tIiwiaWF0IjoxNzg0Mjg5NTk5LCJleHAiOjE3ODQyOTMxOTl9.e90uDcD2XAoJavVU-g0n8EZzw5Gu_BysjQR9-w5o2WA"
-        
+    const [data, setData] = React.useState([])
+    const [show, setShow] = React.useState(false)
+    const [id, setId] = React.useState("")
 
-        // const token = ""
 
-        let res = await axios.get("http://localhost:5000/api/product",{
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            }
-        })
+    const handelDelete = async (idd) => {
 
-        console.log(res.data)
+        setId(idd)
+
+        console.log(id)
+        console.log(idd)
+        let res = await axios.delete(url + "/" + idd)
+
+        alert(res.data.message)
 
     }
 
-    fetchData()
 
+
+    React.useEffect(() => {
+
+        const fetchData = async () => {
+
+            let res = await axios.get(url)
+
+            setData(res.data.data)
+            console.log(res.data.data)
+            setShow(true)
+        }
+
+        fetchData()
+    }, [id])
 
     return (
         <div>
+
+            <h1>hii</h1>
+
+            {
+
+                show ? (data.map((value) => {
+
+                    return (
+                        <div key={value._id} className='flex gap-10'>
+
+                            <h1>{value.name}</h1>
+                            <button onClick={() => handelDelete(value._id)}>Delete</button>
+
+                        </div>
+                    )
+                })) : (
+
+                    <h1>
+                        ..............
+                    </h1>
+                )
+            }
+
 
         </div>
     )

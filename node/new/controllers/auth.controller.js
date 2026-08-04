@@ -74,16 +74,24 @@ export const loginUser = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
+        // const token = jwt.sign(
+        //     {
+        //         id: user._id,
+        //         role: user.role
+        //     },
+        //     process.env.JWT_SECRET,
+        //     {
+        //         expiresIn: "1h"
+        //     }
+        // );
+
+
+        const accessToken = jwt.sign(
             {
-                id: user._id,
-                role: user.role
-            },
-            process.env.JWT_SECRET,
-            {
-                expiresIn: "1h"
+                id:user._id
             }
-        );
+        )
+
 
         res.status(200).json({
             success: true,

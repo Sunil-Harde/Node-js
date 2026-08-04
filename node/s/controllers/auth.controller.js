@@ -71,34 +71,80 @@ export const login = async (req, res, next) => {
 
         }
 
-        const comparePassword = await bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, user.password)
 
-        console.log(comparePassword)
+        console.log(isMatch)
 
-        if (!comparePassword) {
+        if (!isMatch) {
 
-            return res.status(400).json({
+            return res.status(401).json({
                 success: false,
                 message: "user password is wrong"
             })
 
         }
 
-        const token = await jwt.sign(
+        // const token = await jwt.sign(
+        //     {
+        //         _id: user._id,
+        //         role: user.role
+        //     },
+        //     process.env.JWT_SECRET_KEY,
+        //     {
+        //         expiresIn: "1d"
+        //     }
+        // )
+
+
+        const accessToken = jwt.sign(
             {
                 _id: user._id,
                 role: user.role
+
             },
-            process.env.SECRET_KEY,
+
+            process.env.ACCESS_TOKEN_SECRET,
             {
-                expiresIn: "1d"
+                expiresIn: '15m'
             }
         )
+
+        const refreshToken = jwt.sign(
+            {
+                userId: user._id
+            },
+
+            process.env.REFRESH_TOKEN_SECRET,
+
+            {
+                expiresIn: '7d'
+            }
+
+        )
+
+        user.refreshToken = refreshToken;
+
+        await user.save()
+
+        res.cookie(
+            "refreshToken",
+
+            refreshToken,
+
+            {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'strict',
+                maxAge: 1000 * 60 * 60 * 24 * 7
+            }
+        )
+
 
         res.status(200).json({
             success: true,
             message: "login successfully",
-            token,
+            // token,
+            accessToken,
             user: {
                 _id: user._id,
                 role: user.role
@@ -107,6 +153,102 @@ export const login = async (req, res, next) => {
 
     }
 
+
+    catch (err) {
+        next(err)
+    }
+
+}
+
+
+export const refreshToken = async (req, res, next) => {
+
+    try {
+
+        const token = req.cookies.refreshToken;
+
+        if (!token) {
+
+            return res.status(401).json({
+
+                success: false,
+                message: "refresh token missing"
+
+            })
+        }
+
+        const decode = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET)
+
+        const user = await User.findById(decode.userId)
+
+        if (!user || user.refreshToken !== token) {
+
+            return res.status(401).json({
+                success: false,
+                message: "Invalid refresh token"
+            })
+
+        }
+
+        const newAccessToken = jwt.sing(
+            {
+                userId: user._id,
+                role: user.role
+            },
+
+            process.env.ACCESS_TOKEN_SECRET,
+
+            {
+                expiresIn: '15m'
+            }
+        )
+
+        res.status(200).json({
+            success: true,
+            accessToken: newAccessToken
+        })
+
+    }
+
+
+    catch (err) {
+        next(err)
+    }
+
+
+}
+
+
+export const logoutUser = async (req, res, next) => {
+
+    try {
+
+        const token = req.cookies.refreshToken;
+
+        if (token) {
+
+            const decode = jwt.verify(
+                token,
+                process.env.REFRESH_TOKEN_SECRET
+            )
+
+            await User.findByIdAndUpdate(
+                decode.userId,
+                {
+                    refreshToken: null
+                }
+            )
+        }
+
+        res.clearCookie('refreshToken')
+
+        res.status(200).json({
+            success: true,
+            message: 'logged out successfully'
+        })
+
+
+    }
 
     catch (err) {
         next(err)

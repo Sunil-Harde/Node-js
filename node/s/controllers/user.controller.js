@@ -6,7 +6,7 @@ export const userProfile = async (req, res, next) => {
 
     try {
 
-        const user = await User.findById(req.user.id).selsct("-password")
+        const user = await User.findById(req.user._id).select("-password")
         console.log(user);
         // console.log(req.user);
 

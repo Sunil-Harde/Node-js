@@ -40,7 +40,11 @@ import mongoose from "mongoose"
 
     resetPasswordExpire:{
         type:Date
-    }
+    },
+
+    refreshToken: {
+    type: String
+}
 
 }, {
 

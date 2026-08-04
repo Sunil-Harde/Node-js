@@ -1,12 +1,16 @@
 import express from "express";
-import { register, login, forgotPassword, resetPassword } from "../controllers/auth.controller.js";
+import { register, login, forgotPassword, resetPassword, logoutUser, refreshToken } from "../controllers/auth.controller.js";
+
 
 
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
+router.post("/logout", logoutUser);
+router.post("/refresh-token", refreshToken); 
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
 
 export default router;
+
