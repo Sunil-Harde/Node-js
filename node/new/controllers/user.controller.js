@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 
 
 
-
 export const getProfile = async (req, res) => {
 
 
@@ -26,7 +25,6 @@ export const getProfile = async (req, res) => {
             success: true,
             user
         });
-
 
     }
 

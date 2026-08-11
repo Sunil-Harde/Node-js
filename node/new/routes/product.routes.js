@@ -11,7 +11,8 @@ const router = express.Router()
 
 
 router.post("/", createProductValidator, validateRequest, upload.single("image"), createProduct)
-router.get("/",authorize("admin", "user"), getProduct)
+// router.get("/",authorize("admin", "user"), getProduct)
+router.get("/", getProduct)
 
 
 export default router

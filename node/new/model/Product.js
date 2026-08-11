@@ -16,6 +16,15 @@ const productSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+
+    stock: {
+        type: Number,
+        default: 0
+    },
+    category:{
+        type:String,
+        required:true
     }
 
 }, { timestamps: true });

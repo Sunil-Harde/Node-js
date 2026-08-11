@@ -29,7 +29,6 @@ export const auth = async (req, res, next) => {
 
         const verifyToken = jwt.verify(token, process.env.JWT_SECRET)
 
-        
         console.log(verifyToken);
         req.user = verifyToken
 

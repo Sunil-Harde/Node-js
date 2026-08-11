@@ -2,7 +2,7 @@ const Product = require("../model/product.model.js")
 
 
 
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
 
     try {
 
@@ -34,13 +34,7 @@ const createProduct = async (req, res) => {
 
     catch (err) {
 
-        console.log(err);
-
-
-        res.json({
-            success: false,
-            message: "internal server error"
-        })
+        next(err)
 
     }
 
@@ -49,7 +43,7 @@ const createProduct = async (req, res) => {
 }
 
 
-const getProducts = async (req, res) => {
+const getProducts = async (req, res, next) => {
     try {
 
 
@@ -68,13 +62,7 @@ const getProducts = async (req, res) => {
 
     catch (err) {
 
-        console.log(err);
-
-        res.json({
-            success: false,
-            message: "internal server error"
-        })
-
+        next(err)
 
     }
 }

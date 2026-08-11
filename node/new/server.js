@@ -41,7 +41,9 @@ app.use("/api/user", userRoutes)
 // app.use(auth)
 app.use("/api/product", productRoutes)
 
+
 app.use(errorHandler);
+
 
 const PORT = process.env.PORT || 6000
 
